@@ -1,0 +1,21 @@
+S :: = ABC
+A :: = aB | ε
+B :: = cAb | bCa
+C :: = bB | aAc
+
+FIRST                 FOLLOW
+
+S = {a, c, b}       S = {$}
+A = {a, ε}          A = {c, b}
+B = {c, b}          B = {b, a, c, $}
+C = {b, a}          C = {$, a}
+
+TABELA
+
+     a     |    b    |    c    |   $
+________________________________________
+S| S-> ABC | S-> ABC | S-> ABC |       |
+A| A -> aB | A-> ε   | A-> ε   | A->ε  |
+B|         | B-> cAb | B-> bCa |       | 
+C| C-> aAc | C-> bB  |         |       |
+________________________________________
