@@ -1,22 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Analisador sintático - URI LEONARDO KLEIN 099180</title>
-  </head>
-  <body>
-    <header>Analisador sintático</header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisador Sintático Top-Down</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>Analisador Sintático</header>
     <main>
-      <div class="gramatica"></div>
-      <div class="first"></div>
-      <div class="follow"></div>
-      <div class="inserir-gramatica"></div>
+        <div class="wrapp-gramar-table">
+            <div class="container-small">
+                <div class="container-table">
+                    <h2>Gramática:</h2>
+                    <div class="wrapp-gramar-first-follow">
+                        <p>S :: = aA | bB</p>
+                        <p>A :: = aS | c | ε</p>
+                        <p>B :: = cA | bC</p>
+                        <p>C :: = a | ε</p>
+                    </div>
+                </div>
+                <div class="wrap-first-follow">
+                    <div class="container-table">
+                       <h2>First:</h2> 
+                       <div class="wrapp-gramar-first-follow">
+                            <p>S = {a, b}</p>
+                            <p>A = {a, c, ε}</p>
+                            <p>B = {c, b}</p>
+                            <p>C = {a, ε}</p>
+                        </div>
+                    </div>
+                    <div class="container-table">
+                        <h2>Follow:</h2>
+                        <div class="wrapp-gramar-first-follow">
+                            <p>S = {$}</p>
+                            <p>A = {$}</p>
+                            <p>B = {$}</p>
+                            <p>C = {$}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-small">
+                <div>
+                    <h2>Tabela de parsing:</h2>
+                    <table class="parse-table" style="width: 100%">
+                        <th>-</th>
+                        <th>a</th>
+                        <th>b</th>
+                        <th>c</th>
+                        <th>$</th>
+                        <tr>
+                          <td>S</td>
+                          <td>S &rarr; aA</td>
+                          <td>S &rarr; bB</td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>A</td>
+                          <td>A &rarr; aS</td>
+                          <td></td>
+                          <td>A &rarr; c</td>
+                          <td>A &rarr; ε</td>
+                        </tr>
+                        <tr>
+                          <td>B</td>
+                          <td></td>
+                          <td>B &rarr; bC</td>
+                          <td>B &rarr; cA</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>C</td>
+                          <td>C &rarr; a</td>
+                          <td></td>
+                          <td></td>
+                          <td>C &rarr; ε</td>
+                        </tr>
+                      </table>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h1>Analisador Sintático Top-Down</h1>
+            <br>
+            <div class="input-section">
+                <label for="input-sentence">Insira a sentença:</label>
+                <input type="text" id="input-sentence" placeholder="Digite a sentença aqui">
+                <button id="generate-btn">Gerar Sentença</button>
+                <button id="analyze-btn">Analisar</button>
+                <button id="clear-btn">Limpar</button>
+            </div>
+            <div class="output-section">
+                <h2>Resultado:</h2>
+                <table id="output-table">
+                    <thead>
+                        <tr>
+                            <th>Passo</th>
+                            <th>Pilha</th>
+                            <th>Entrada</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
-    <footer>
-      Feito por &nbsp;
-      <a href="https://github.com/LeonardoLuisKlein">Leonardo Luis Klein</a>
-    </footer>
-  </body>
+    <footer><p>Desenvolvido por&nbsp;</p> <a href="https://github.com/LeonardoLuisKlein">Leonardo Luis Klein</a></footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
 </html>

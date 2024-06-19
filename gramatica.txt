@@ -1,14 +1,16 @@
-S :: = ABC
-A :: = aB | ε
-B :: = cAb | bCa
-C :: = bB | aAc
+S :: = aA | bB
+A :: = aS | c | ε
+B :: = cA | bC
+C :: = a | ε
+
+
 
 FIRST                 FOLLOW
 
-S = {a, c, b}       S = {$}
-A = {a, ε}          A = {c, b}
-B = {c, b}          B = {b, a, c, $}
-C = {b, a}          C = {$, a}
+S = {a, b}          S = {$}
+A = {a, c ,ε}       A = {$}
+B = {c, b}          B = {$}
+C = {a, ε}          C = {$}
 
 TABELA
 
