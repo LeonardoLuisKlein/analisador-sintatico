@@ -32,17 +32,17 @@ main {
   padding: 10px 0 10px 0;
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 50px;
 }
 
 footer {
   width: 100%;
   height: 25px;
-  text-align: center;
-  position: absolute;
-  left: 0;
-  bottom: 0;
+  bottom: 0px;
+  position: fixed;
+  z-index: 99999;
+  width: 100%;
+  -webkit-transform: translateZ(0);
   font-size: 16px;
   background-color: #252525;
 }
@@ -79,9 +79,11 @@ footer a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 600px;
   height: 100%;
+  margin-bottom: 40px;
 }
 
-.container-small {
+.container-small,
+.container-small-table {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -90,6 +92,10 @@ footer a:hover {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 600px;
+}
+
+.container-small-table {
+  height: 280px;
 }
 
 .wrapp-gramar-first-follow {
@@ -121,7 +127,8 @@ h1 {
   text-align: center;
 }
 
-.input-section, .output-section {
+.input-section,
+.output-section {
   margin-bottom: 20px;
 }
 
@@ -157,7 +164,7 @@ button {
 }
 
 button:hover {
-  background-color: #4CAF50;
+  background-color: #4caf50;
 }
 
 #output-table {
@@ -166,7 +173,8 @@ button:hover {
   margin-top: 20px;
 }
 
-#output-table th, #output-table td {
+#output-table th,
+#output-table td {
   border: 1px solid #ccc;
   padding: 10px;
   text-align: left;
@@ -176,7 +184,8 @@ button:hover {
   background-color: #f0f0f0;
 }
 
-table, tbody {
+table,
+tbody {
   height: 100%;
   overflow-y: auto;
 }
@@ -186,7 +195,8 @@ table, tbody {
   border-collapse: collapse;
 }
 
-.parse-table th, .parse-table td {
+.parse-table th,
+.parse-table td {
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -211,7 +221,7 @@ tr:hover {
 .parse-table th {
   padding-top: 12px;
   padding-bottom: 12px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
 
