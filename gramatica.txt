@@ -1,23 +1,32 @@
-S :: = aA | bB
-A :: = aS | c | ε
-B :: = cA | bC
-C :: = a | ε
+S :: = aAb | bB
+A :: = aSa | ε
+B :: = bC  | cAc
+C :: = aCc | ε
 
 
 
 FIRST                 FOLLOW
 
-S = {a, b}          S = {$}
-A = {a, c ,ε}       A = {$}
+S = {a, b}          S = {$, a}
+A = {a, ε}          A = {b, c}
 B = {c, b}          B = {$}
-C = {a, ε}          C = {$}
+C = {a, ε}          C = {c, $}
 
 TABELA
 
-     a     |    b    |    c    |   $
-________________________________________
-S| S-> ABC | S-> ABC | S-> ABC |       |
-A| A -> aB | A-> ε   | A-> ε   | A->ε  |
-B|         | B-> cAb | B-> bCa |       | 
-C| C-> aAc | C-> bB  |         |       |
-________________________________________
+     a      |    b    |    c    |   $
+_________________________________________
+S| S -> aAb | S -> bB |         |        |
+A| A -> aSa | A -> ε  | A -> ε  |        |
+B|          | B-> bC  | B-> cAc |        | 
+C| C-> aCc  |         | C -> ε  | C -> ε |
+_________________________________________
+
+bcaaaaabccababac aceito em 27 it
+bbaaaccc aceito em 15 it
+aaabab aceito em 11 it
+bbac aceito em 9 it
+
+
+aaabbab erro em 9 it
+aabbcab erro em 10 it

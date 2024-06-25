@@ -14,10 +14,10 @@
           <div class="container-table">
             <h2>Gramática:</h2>
             <div class="wrapp-gramar-first-follow">
-              <p>S :: = aA | bB</p>
-              <p>A :: = aS | c | ε</p>
-              <p>B :: = cA | bC</p>
-              <p>C :: = a | ε</p>
+              <p>S :: = aAb | bB</p>
+              <p>A :: = aSa | ε</p>
+              <p>B :: = bC | cAc</p>
+              <p>C :: = aCc | ε</p>
             </div>
           </div>
           <div class="wrap-first-follow">
@@ -25,7 +25,7 @@
               <h2>First:</h2>
               <div class="wrapp-gramar-first-follow">
                 <p>S = {a, b}</p>
-                <p>A = {a, c, ε}</p>
+                <p>A = {a, ε}</p>
                 <p>B = {c, b}</p>
                 <p>C = {a, ε}</p>
               </div>
@@ -33,10 +33,10 @@
             <div class="container-table">
               <h2>Follow:</h2>
               <div class="wrapp-gramar-first-follow">
-                <p>S = {$}</p>
-                <p>A = {$}</p>
+                <p>S = {$, a}</p>
+                <p>A = {b, c}</p>
                 <p>B = {$}</p>
-                <p>C = {$}</p>
+                <p>C = {c, $}</p>
               </div>
             </div>
           </div>
@@ -52,30 +52,30 @@
               <th>$</th>
               <tr>
                 <td>S</td>
-                <td>S &rarr; aA</td>
+                <td>S &rarr; aAb</td>
                 <td>S &rarr; bB</td>
                 <td></td>
                 <td></td>
               </tr>
               <tr>
                 <td>A</td>
-                <td>A &rarr; aS</td>
-                <td></td>
-                <td>A &rarr; c</td>
+                <td>A &rarr; aSa</td>
                 <td>A &rarr; ε</td>
+                <td>A &rarr; ε</td>
+                <td></td>
               </tr>
               <tr>
                 <td>B</td>
                 <td></td>
                 <td>B &rarr; bC</td>
-                <td>B &rarr; cA</td>
+                <td>B &rarr; cAc</td>
                 <td></td>
               </tr>
               <tr>
                 <td>C</td>
-                <td>C &rarr; a</td>
+                <td>C &rarr; aCc</td>
                 <td></td>
-                <td></td>
+                <td>C &rarr; ε</td>
                 <td>C &rarr; ε</td>
               </tr>
             </table>
@@ -115,7 +115,9 @@
     </main>
     <footer>
       <p>Desenvolvido por&nbsp;</p>
-      <a href="https://github.com/LeonardoLuisKlein" target="_blank">Leonardo Luis Klein</a>
+      <a href="https://github.com/LeonardoLuisKlein" target="_blank"
+        >Leonardo Luis Klein</a
+      >
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>

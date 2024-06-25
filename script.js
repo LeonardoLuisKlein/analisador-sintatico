@@ -38,10 +38,10 @@ $(document).ready(function () {
 });
 
 const parseTable = {
-  S: { a: ["a", "A"], b: ["b", "B"] },
-  A: { a: ["a", "S"], c: ["c"], $: ["ε"] },
-  B: { c: ["c", "A"], b: ["b", "C"] },
-  C: { a: ["a"], $: ["ε"] },
+  S: { a: ["a", "A", "b"], b: ["b", "B"] },
+  A: { a: ["a", "S", "a"], b: ["ε"], c: ["ε"] },
+  B: { b: ["b", "C"], c: ["c", "A", "c"] },
+  C: { a: ["a", "C", "c"], c: ["ε"], $: ["ε"] },
 };
 
 function generateSentence() {
@@ -102,27 +102,29 @@ function analyzeSentence(sentence) {
 
     if (top === sentence[currentIndex]) {
       action = `Lê '${top}'`;
+      currentOutputRows += `<tr><td>${currentStep}</td><td>$${stackDisplay}</td><td>${currentInputRemaining}</td><td>${action}</td></tr>`;
       currentIndex++;
       currentInputRemaining = sentence.substring(currentIndex) + "$";
     } else if (parseTable[top] && parseTable[top][sentence[currentIndex]]) {
       let production = parseTable[top][sentence[currentIndex]];
-      currentStack.push(...production.slice().reverse());
+      if (production[0] !== "ε") {
+        currentStack.push(...production.slice().reverse());
+      }
       action = `${top} &rarr; ${production.join(" ")}`;
+      currentOutputRows += `<tr><td>${currentStep}</td><td>$${stackDisplay}</td><td>${currentInputRemaining}</td><td>${action}</td></tr>`;
     } else if (
       parseTable[top] &&
       parseTable[top]["$"] &&
-      parseTable[top]["$"][0] === "ε" &&
-      currentIndex === sentence.length &&
-      !parseTable[top][sentence[currentIndex]]
+      parseTable[top]["$"][0] === "ε"
     ) {
       action = `${top} &rarr; ε`;
+      currentOutputRows += `<tr><td>${currentStep}</td><td>$${stackDisplay}</td><td>${currentInputRemaining}</td><td>${action}</td></tr>`;
     } else {
       currentOutputRows += `<tr><td>${currentStep}</td><td>$${stackDisplay}</td><td>${currentInputRemaining}</td><td>Erro em ${currentStep} iterações</td></tr>`;
       $("#output-table tbody").html(currentOutputRows);
       return;
     }
 
-    currentOutputRows += `<tr><td>${currentStep}</td><td>$${stackDisplay}</td><td>${currentInputRemaining}</td><td>${action}</td></tr>`;
     currentStep++;
     $("#output-table tbody").html(currentOutputRows);
   }
@@ -164,6 +166,7 @@ function stepAnalysis() {
 
   if (top === currentSentence[currentIndex]) {
     action = `Lê '${top}'`;
+    currentOutputRows += `<tr><td>${currentStep}</td><td>$${stackDisplay}</td><td>${currentInputRemaining}</td><td>${action}</td></tr>`;
     currentIndex++;
     currentInputRemaining = currentSentence.substring(currentIndex) + "$";
   } else if (
@@ -171,23 +174,24 @@ function stepAnalysis() {
     parseTable[top][currentSentence[currentIndex]]
   ) {
     let production = parseTable[top][currentSentence[currentIndex]];
-    currentStack.push(...production.slice().reverse());
+    if (production[0] !== "ε") {
+      currentStack.push(...production.slice().reverse());
+    }
     action = `${top} &rarr; ${production.join(" ")}`;
+    currentOutputRows += `<tr><td>${currentStep}</td><td>$${stackDisplay}</td><td>${currentInputRemaining}</td><td>${action}</td></tr>`;
   } else if (
     parseTable[top] &&
     parseTable[top]["$"] &&
-    parseTable[top]["$"][0] === "ε" &&
-    currentIndex === currentSentence.length &&
-    !parseTable[top][currentSentence[currentIndex]]
+    parseTable[top]["$"][0] === "ε"
   ) {
     action = `${top} &rarr; ε`;
+    currentOutputRows += `<tr><td>${currentStep}</td><td>$${stackDisplay}</td><td>${currentInputRemaining}</td><td>${action}</td></tr>`;
   } else {
     currentOutputRows += `<tr><td>${currentStep}</td><td>$${stackDisplay}</td><td>${currentInputRemaining}</td><td>Erro em ${currentStep} iterações</td></tr>`;
     $("#output-table tbody").html(currentOutputRows);
     return;
   }
 
-  currentOutputRows += `<tr><td>${currentStep}</td><td>$${stackDisplay}</td><td>${currentInputRemaining}</td><td>${action}</td></tr>`;
   currentStep++;
   $("#output-table tbody").html(currentOutputRows);
 }
