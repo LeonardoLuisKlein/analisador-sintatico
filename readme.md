@@ -8,16 +8,23 @@ B :: = bC  | cAc
 C :: = aCc | ε
 
 
-FIRST                 FOLLOW
+FIRST                 
 
-S = {a, b}          S = {$, a}
-A = {a, ε}          A = {b, c}
-B = {c, b}          B = {$}
-C = {a, ε}          C = {c, $}
+S = {a, b}          
+A = {a, ε}          
+B = {c, b}          
+C = {a, ε}          
+
+FOLLOW
+
+S = {$, a}
+A = {b, c}
+B = {$}
+C = {c, $}
 
 TABELA
 
-     a      |    b    |    c    |   $
+     a          b        c       $
 _________________________________________
 S| S -> aAb | S -> bB |         |        |
 A| A -> aSa | A -> ε  | A -> ε  |        |
@@ -25,11 +32,12 @@ B|          | B-> bC  | B-> cAc |        |
 C| C-> aCc  |         | C -> ε  | C -> ε |
 _________________________________________
 
+Entradas aceitas
 bcaaaaabccababac aceito em 27 it
 bbaaaccc aceito em 15 it
 aaabab aceito em 11 it
 bbac aceito em 9 it
 
-
+Entradas com erro
 aaabbab erro em 9 it
 aabbcab erro em 10 it
